@@ -46,8 +46,7 @@
             if (nome !== "") {
                 var listaOracao = document.getElementById("lista-oracao");
                 var item = document.createElement("li");
-                var hora_final = pad((hora + Math.floor((minuto + 15) / 60)) % 24, 2) + ":" + pad((minuto + 15) % 60, 2);
-                item.textContent = `${hora_inicio} às ${hora_final} - ${nome} - Reservado`;
+                item.textContent = `${hora_inicio} às ${adicionar15Minutos(hora_inicio)} - ${nome} - Reservado`;
                 listaOracao.appendChild(item);
 
                 // Salva o nome no localStorage
@@ -57,6 +56,14 @@
                 input.disabled = true;
                 input.nextElementSibling.disabled = true;
             }
+        }
+
+        function adicionar15Minutos(hora) {
+            var [horas, minutos] = hora.split(":").map(Number);
+            minutos += 15;
+            horas += Math.floor(minutos / 60);
+            minutos %= 60;
+            return pad(horas, 2) + ":" + pad(minutos, 2);
         }
 
         function pad(num, size) {
