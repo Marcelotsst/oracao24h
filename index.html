@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -71,17 +71,7 @@
         }
 
         // Chama a função para gerar a lista de horários ao carregar a página
-        window.onload = function () {
-            gerarListaHorarios();
-
-            // Adiciona os event listeners após a geração da lista
-            var inputs = document.querySelectorAll('input[type="text"]');
-            inputs.forEach(function (input) {
-                input.addEventListener('input', function () {
-                    localStorage.setItem(input.id, input.value);
-                });
-            });
-        };
+        window.onload = gerarListaHorarios;
     </script>
 </body>
 </html>
