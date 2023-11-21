@@ -23,16 +23,24 @@
                     var li = document.createElement("li");
                     li.innerHTML = `
                         <span>${hora_inicio} às ${hora_fim}</span>
-                        <input type="text" placeholder="Digite seu nome">
+                        <input type="text" placeholder="Digite seu nome" data-hora="${hora_inicio}">
                         <button onclick="confirmarEscolha('${hora_inicio}')">Confirmar</button>
                     `;
                     listaOracao.appendChild(li);
+
+                    // Recupera os dados do localStorage se existirem
+                    var nomeSalvo = localStorage.getItem(hora_inicio);
+                    if (nomeSalvo) {
+                        var input = li.querySelector("input");
+                        input.value = nomeSalvo;
+                        confirmarEscolha(hora_inicio);
+                    }
                 }
             }
         }
 
         function confirmarEscolha(hora_inicio) {
-            var input = document.querySelector(`input[type="text"][placeholder="Digite seu nome"]`);
+            var input = document.querySelector(`input[data-hora="${hora_inicio}"]`);
             var nome = input.value;
 
             if (nome !== "") {
