@@ -1,4 +1,4 @@
-          <!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
         <li>
             <span><?= $intervalo ?></span>
             <input id="<?= $id_input ?>" type="text" placeholder="Digite seu nome">
-            <button onclick="confirmarEscolha('<?= $intervalo ?>', '<?= $id_input ?>')">Confirmar</button>
+            <button onclick="confirmarEscolha('<?= $hora_inicio ?>', '<?= $id_input ?>')">Confirmar</button>
         </li>
         <?php } ?>
     </ul>
@@ -28,19 +28,19 @@
     <script src="script.js"></script>
 
     <script>
-        function confirmarEscolha(intervalo, idInput) {
+        function confirmarEscolha(hora, idInput) {
             var nome = document.getElementById(idInput).value;
 
             if (nome !== "") {
                 // Adiciona o nome à lista de oração
                 var listaOracao = document.getElementById("lista-oracao");
                 var item = document.createElement("li");
-                item.textContent = `${intervalo} - ${nome} - Reservado`;
+                item.textContent = `${hora}:00 às ${hora}:15 - ${nome} - Reservado`;
                 listaOracao.appendChild(item);
 
                 // Desabilita o input e o botão para evitar mais escolhas no mesmo horário
                 document.getElementById(idInput).disabled = true;
-                document.querySelector(`button[onclick="confirmarEscolha('${intervalo}', '${idInput}')"]`).disabled = true;
+                document.querySelector(`button[onclick="confirmarEscolha('${hora}', '${idInput}')"]`).disabled = true;
             }
         }
     </script>
