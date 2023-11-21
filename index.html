@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+          <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,42 +9,38 @@
 <body>
     <h1>Lista de Oração 24 Horas</h1>
 
-    <ul id="horarios-lista">
+    <ul id="lista-oracao">
         <?php
             for ($hora = 0; $hora < 24; $hora++) {
                 $hora_inicio = sprintf("%02d", $hora);
                 $hora_fim = sprintf("%02d", $hora + 1);
                 $intervalo = "$hora_inicio:00 às $hora_fim:00";
-                $id_botao = "$hora_inicio:00";
                 $id_input = "input-$hora_inicio:00";
         ?>
         <li>
             <span><?= $intervalo ?></span>
             <input id="<?= $id_input ?>" type="text" placeholder="Digite seu nome">
-            <button id="<?= $id_botao ?>" onclick="confirmarEscolha(this.id)">Confirmar</button>
+            <button onclick="confirmarEscolha('<?= $intervalo ?>', '<?= $id_input ?>')">Confirmar</button>
         </li>
         <?php } ?>
     </ul>
 
-    <ul id="lista-oracao"></ul>
-
     <script src="script.js"></script>
 
     <script>
-        function confirmarEscolha(idBotao) {
-            var idInput = "input-" + idBotao;
+        function confirmarEscolha(intervalo, idInput) {
             var nome = document.getElementById(idInput).value;
 
             if (nome !== "") {
                 // Adiciona o nome à lista de oração
                 var listaOracao = document.getElementById("lista-oracao");
                 var item = document.createElement("li");
-                item.textContent = `${idBotao} - ${nome}`;
+                item.textContent = `${intervalo} - ${nome} - Reservado`;
                 listaOracao.appendChild(item);
 
-                // Desabilita o botão e o input para evitar mais escolhas no mesmo horário
-                document.getElementById(idBotao).disabled = true;
+                // Desabilita o input e o botão para evitar mais escolhas no mesmo horário
                 document.getElementById(idInput).disabled = true;
+                document.querySelector(`button[onclick="confirmarEscolha('${intervalo}', '${idInput}')"]`).disabled = true;
             }
         }
     </script>
