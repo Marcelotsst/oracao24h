@@ -49,7 +49,8 @@
                 // Adiciona o nome à lista de oração
                 var listaOracao = document.getElementById("lista-oracao");
                 var item = document.createElement("li");
-                item.textContent = `${hora_inicio} às ${hora_inicio.replace(":", "")}:15 - ${nome} - Reservado`;
+                var hora_final = pad((hora + Math.floor((minuto + 15) / 60)) % 24, 2) + ":" + pad((minuto + 15) % 60, 2);
+                item.textContent = `${hora_inicio} às ${hora_final} - ${nome} - Reservado`;
                 listaOracao.appendChild(item);
 
                 // Salva o nome no localStorage
@@ -73,3 +74,4 @@
     </script>
 </body>
 </html>
+
