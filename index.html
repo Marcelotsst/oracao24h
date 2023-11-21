@@ -51,7 +51,7 @@
                 // Adiciona o nome à lista de oração
                 var listaOracao = document.getElementById("lista-oracao");
                 var item = document.createElement("li");
-                item.textContent = `${intervalo} - ${nome} - Reservado`;
+                item.textContent = `${hora_inicio} às ${hora_inicio.replace(":", "")}:15 - ${nome} - Reservado`;
                 listaOracao.appendChild(item);
 
                 // Salva o nome no localStorage
