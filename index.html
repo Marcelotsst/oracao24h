@@ -23,35 +23,28 @@
                     var li = document.createElement("li");
                     li.innerHTML = `
                         <span>${hora_inicio} às ${hora_fim}</span>
-                        <input type="text" placeholder="Digite seu nome" data-hora="${hora_inicio}">
+                        <input type="text" placeholder="Digite seu nome">
                         <button onclick="confirmarEscolha('${hora_inicio}')">Confirmar</button>
                     `;
                     listaOracao.appendChild(li);
-
-                    // Recupera os dados do localStorage se existirem
-                    var nomeSalvo = localStorage.getItem(hora_inicio);
-                    if (nomeSalvo) {
-                        var input = li.querySelector("input");
-                        input.value = nomeSalvo;
-                        confirmarEscolha(hora_inicio);
-                    }
                 }
             }
         }
 
         function confirmarEscolha(hora_inicio) {
-            var input = document.querySelector(`input[data-hora="${hora_inicio}"]`);
+            var input = document.querySelector(`input[type="text"][placeholder="Digite seu nome"]`);
             var nome = input.value;
 
             if (nome !== "") {
                 var listaOracao = document.getElementById("lista-oracao");
                 var item = document.createElement("li");
-                var hora_final = pad((hora + Math.floor((minuto + 15) / 60)) % 24, 2) + ":" + pad((minuto + 15) % 60, 2);
-                item.textContent = `${hora_inicio} às ${hora_final} - ${nome} - Reservado`;
+                item.textContent = `${hora_inicio} às ${hora_inicio.replace(":", "")}:15 - ${nome} - Reservado`;
                 listaOracao.appendChild(item);
 
+                // Salva o nome no localStorage
                 localStorage.setItem(hora_inicio, nome);
 
+                // Desabilita o input e o botão para evitar mais escolhas no mesmo horário
                 input.disabled = true;
                 input.nextElementSibling.disabled = true;
             }
