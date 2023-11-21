@@ -37,19 +37,19 @@
         }
 
         // Função para confirmar a escolha
-        function confirmarEscolha(hora, idInput) {
+        function confirmarEscolha(hora_inicio, idInput) {
             var nome = document.getElementById(idInput).value;
 
             if (nome !== "") {
                 // Adiciona o nome à lista de oração
                 var listaOracao = document.getElementById("lista-oracao");
                 var item = document.createElement("li");
-                item.textContent = `${hora} às ${hora.replace(":", "")}:15 - ${nome} - Reservado`;
+                item.textContent = `${hora_inicio} às ${hora_inicio.replace(":", "")}:15 - ${nome} - Reservado`;
                 listaOracao.appendChild(item);
 
                 // Desabilita o input e o botão para evitar mais escolhas no mesmo horário
                 document.getElementById(idInput).disabled = true;
-                document.querySelector(`button[onclick="confirmarEscolha('${hora}', '${idInput}')"]`).disabled = true;
+                document.querySelector(`button[onclick="confirmarEscolha('${hora_inicio}', '${idInput}')"]`).disabled = true;
             }
         }
 
