@@ -21,9 +21,9 @@
             for (var hora = 0; hora < 24; hora++) {
                 for (var minuto = 0; minuto < 60; minuto += 15) {
                     var hora_inicio = pad(hora, 2) + ":" + pad(minuto, 2);
-                    var hora_fim = pad(hora, 2) + ":" + pad(minuto + 15, 2);
+                    var hora_fim = pad((hora + Math.floor((minuto + 15) / 60)) % 24, 2) + ":" + pad((minuto + 15) % 60, 2);
                     var intervalo = hora_inicio + " às " + hora_fim;
-                    var id_input = "input-" + hora_inicio;
+                    var id_input = "input-" + hora_inicio.replace(":", "");
 
                     var li = document.createElement("li");
                     li.innerHTML = `
@@ -44,7 +44,7 @@
                 // Adiciona o nome à lista de oração
                 var listaOracao = document.getElementById("lista-oracao");
                 var item = document.createElement("li");
-                item.textContent = `${hora} às ${hora}:15 - ${nome} - Reservado`;
+                item.textContent = `${hora} às ${hora.replace(":", "")}:15 - ${nome} - Reservado`;
                 listaOracao.appendChild(item);
 
                 // Desabilita o input e o botão para evitar mais escolhas no mesmo horário
