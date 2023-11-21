@@ -19,18 +19,20 @@
             var listaOracao = document.getElementById("lista-oracao");
 
             for (var hora = 0; hora < 24; hora++) {
-                var hora_inicio = pad(hora, 2) + ":00";
-                var hora_fim = pad(hora + 1, 2) + ":00";
-                var intervalo = hora_inicio + " às " + hora_fim;
-                var id_input = "input-" + hora_inicio;
+                for (var minuto = 0; minuto < 60; minuto += 15) {
+                    var hora_inicio = pad(hora, 2) + ":" + pad(minuto, 2);
+                    var hora_fim = pad(hora, 2) + ":" + pad(minuto + 15, 2);
+                    var intervalo = hora_inicio + " às " + hora_fim;
+                    var id_input = "input-" + hora_inicio;
 
-                var li = document.createElement("li");
-                li.innerHTML = `
-                    <span>${intervalo}</span>
-                    <input id="${id_input}" type="text" placeholder="Digite seu nome">
-                    <button onclick="confirmarEscolha('${hora_inicio}', '${id_input}')">Confirmar</button>
-                `;
-                listaOracao.appendChild(li);
+                    var li = document.createElement("li");
+                    li.innerHTML = `
+                        <span>${intervalo}</span>
+                        <input id="${id_input}" type="text" placeholder="Digite seu nome">
+                        <button onclick="confirmarEscolha('${hora_inicio}', '${id_input}')">Confirmar</button>
+                    `;
+                    listaOracao.appendChild(li);
+                }
             }
         }
 
@@ -51,7 +53,7 @@
             }
         }
 
-        // Função para garantir que as horas tenham dois dígitos
+        // Função para garantir que as horas e minutos tenham dois dígitos
         function pad(num, size) {
             num = num.toString();
             while (num.length < size) num = "0" + num;
@@ -63,4 +65,3 @@
     </script>
 </body>
 </html>
- 
