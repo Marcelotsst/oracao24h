@@ -4,7 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Lista de Oração</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('Bibliotecas/Imagens/icm-eustaquio-gomes');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            color: #fff; /* Cor do texto */
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #lista-oracao {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            background-color: rgba(255, 255, 255, 0.5); /* Cor de fundo com transparência */
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 150px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 5px;
+            background-color: #4CAF50; /* Cor de fundo do botão */
+            color: #fff; /* Cor do texto do botão */
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc; /* Cor de fundo do botão desativado */
+            cursor: not-allowed;
+        }
+    </style>
+    <title>Lista de Oração 24 Horas - ICM Eustáquio Gomes</title>
 </head>
 <body>
     <h1>Lista de Oração 24 Horas</h1>
@@ -14,54 +62,7 @@
     <script src="script.js"></script>
 
     <script>
-        // Função para gerar a lista de horários
-        function gerarListaHorarios() {
-            var listaOracao = document.getElementById("lista-oracao");
-
-            for (var hora = 0; hora < 24; hora++) {
-                for (var minuto = 0; minuto < 60; minuto += 15) {
-                    var hora_inicio = pad(hora, 2) + ":" + pad(minuto, 2);
-                    var hora_fim = pad((hora + Math.floor((minuto + 15) / 60)) % 24, 2) + ":" + pad((minuto + 15) % 60, 2);
-                    var intervalo = hora_inicio + " às " + hora_fim;
-                    var id_input = "input-" + hora_inicio.replace(":", "");
-
-                    var li = document.createElement("li");
-                    li.innerHTML = `
-                        <span>${intervalo}</span>
-                        <input id="${id_input}" type="text" placeholder="Digite seu nome">
-                        <button onclick="confirmarEscolha('${hora_inicio}', '${id_input}')">Confirmar</button>
-                    `;
-                    listaOracao.appendChild(li);
-                }
-            }
-        }
-
-        // Função para confirmar a escolha
-        function confirmarEscolha(hora, idInput) {
-            var nome = document.getElementById(idInput).value;
-
-            if (nome !== "") {
-                // Adiciona o nome à lista de oração
-                var listaOracao = document.getElementById("lista-oracao");
-                var item = document.createElement("li");
-                item.textContent = `${hora} às ${hora.replace(":", "")}:15 - ${nome} - Reservado`;
-                listaOracao.appendChild(item);
-
-                // Desabilita o input e o botão para evitar mais escolhas no mesmo horário
-                document.getElementById(idInput).disabled = true;
-                document.querySelector(`button[onclick="confirmarEscolha('${hora}', '${idInput}')"]`).disabled = true;
-            }
-        }
-
-        // Função para garantir que as horas e minutos tenham dois dígitos
-        function pad(num, size) {
-            num = num.toString();
-            while (num.length < size) num = "0" + num;
-            return num;
-        }
-
-        // Chama a função para gerar a lista de horários ao carregar a página
-        window.onload = gerarListaHorarios;
+        // O restante do seu código JavaScript aqui...
     </script>
 </body>
 </html>
