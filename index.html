@@ -7,7 +7,7 @@
     <title>Lista de Oração</title>
 </head>
 <body>
-    <h1>Lista de Oração 24 Horas - ICM Eustáquio Gomes</h1>
+    <h1>Lista de Oração 24 Horas</h1>
 
     <ul id="lista-oracao"></ul>
 
@@ -32,6 +32,13 @@
                         <button onclick="confirmarEscolha('${hora_inicio}', '${id_input}')">Confirmar</button>
                     `;
                     listaOracao.appendChild(li);
+
+                    // Recupera os dados do localStorage se existirem
+                    var nomeSalvo = localStorage.getItem(hora_inicio);
+                    if (nomeSalvo) {
+                        document.getElementById(id_input).value = nomeSalvo;
+                        confirmarEscolha(hora_inicio, id_input);
+                    }
                 }
             }
         }
@@ -46,6 +53,9 @@
                 var item = document.createElement("li");
                 item.textContent = `${hora_inicio} às ${hora_inicio.replace(":", "")}:15 - ${nome} - Reservado`;
                 listaOracao.appendChild(item);
+
+                // Salva o nome no localStorage
+                localStorage.setItem(hora_inicio, nome);
 
                 // Desabilita o input e o botão para evitar mais escolhas no mesmo horário
                 document.getElementById(idInput).disabled = true;
